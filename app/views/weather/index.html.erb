@@ -1,0 +1,19 @@
+<h1>Weather Dashboard</h1>
+
+<form action="/" method="get">
+  <label for="location">Enter Location:</label>
+  <input type="text" id="location" name="location" value="<%= @location %>">
+  <button type="submit">Get Weather</button>
+</form>
+
+<% if @weather_data %>
+  <h2>Current Weather for <%= @location.titleize %></h2>
+  <p>Temperature: <%= @weather_data['main']['temp'] %>°C</p>
+  <p>Condition: <%= @weather_data['weather'][0]['description'].capitalize %></p>
+  <p>Humidity: <%= @weather_data['main']['humidity'] %>%</p>
+  <p>Wind Speed: <%= @weather_data['wind']['speed'] %> m/s</p>
+<% else %>
+  <% if flash[:alert] %>
+    <p style="color: red;"><%= flash[:alert] %></p>
+  <% end %>
+<% end %>
